@@ -29,14 +29,6 @@ $('#submitButton').on('click', function(){
     //uploads data to the database
     database.ref().push(newTrains);
 
-    //logs everything to the console
-    // console.log(newTrains.name);
-    // console.log(newTrains.tdestination);
-    // console.log(newTrains.tFirst);
-    // console.log(newTrains.tfreq);
-
-    //alert
-    alert("Train successfully added!");
 
     //clears all of the text boxes
     $('#trainNameInput').val("");
@@ -58,36 +50,30 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
     var firstTime = childSnapshot.val().tFirst;
     var frequency = childSnapshot.val().tfreq;
 
-    //train info
-    // console.log(trainName);
-    // console.log(destination);
-    // console.log(firstTime);
-    // console.log(frequency);
-
     //convert first time (push back 1 year to make sure it comes before current time)
     var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-    // console.log(firstTimeConverted);
+
 
     //current time
     var currentTime = moment();
-    // console.log("CURRENT TIME: " + moment(currentTime).format("HH:mm"));
+
 
     //difference between the times
     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    // console.log("DIFFERENCE IN TIME: " + diffTime);
+
 
     //time apart (remainder)
     var tRemainder = diffTime % frequency;
-    // console.log(tRemainder);
+
 
     //minute until train
     var tMinutesTillTrain = frequency - tRemainder;
-    // console.log("MINUTES TIL TRAIN: " + tMinutesTillTrain);
+
 
     //next train
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
     var nextTrainConverted = moment(nextTrain).format("hh:mm a");
-    // console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
+
 
     //add each trains data into the table
     $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + "Every " + frequency + " minutes" + "</td><td>" + nextTrainConverted + "</td><td>" + tMinutesTillTrain + "</td></tr>");

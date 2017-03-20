@@ -9,7 +9,6 @@ th {
 .panel-heading, h4 {
     font-size: 30px;
     text-align: center;
-    background-color: #e5d9e0 !important;
 }
 td {
     text-align: center;
@@ -21,10 +20,9 @@ label {
     background-color: #d9ebdd;
 }
 button {
-    font-size: 20px !important;
-    text-align: center !important;
+    font-size: 20px ;
+    text-align: center
 }
 button:hover {
-    background-color: #e5d9e0 !important;
     text-transform: uppercase;
 }
